@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katil Kim? - Profesyonel Dedektiflik Oyunu</title>
+    <link rel="stylesheet" href="style-advanced.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Başlangıç Ekranı -->
+        <div id="welcome-screen" class="screen active">
+            <div class="container">
+                <h1 class="glitch" data-text="KATİL KİM?">KATİL KİM?</h1>
+                <p class="subtitle">Bir cinayet işlendi. Gerçeği bulabilecek misin?</p>
+                
+                <div class="difficulty-badge">
+                    🔥 PROFESYONEL SEVİYE - EXPERT MODE
+                </div>
+                
+                <div class="warning-box">
+                    <p><strong>⚠️ UYARI:</strong> Bu oyun son derece karmaşık ve zorlayıcıdır.</p>
+                    <p>✓ 8 şüpheli, her biri güçlü motiflerle</p>
+                    <p>✓ 25+ kanıt ve ipucu</p>
+                    <p>✓ 20+ sahte ipucu (red herring)</p>
+                    <p>✓ Şifreli mesajlar ve gizli detaylar</p>
+                    <p>✓ Karmaşık zaman çizelgesi</p>
+                    <p>✓ Çelişkili tanıklıklar</p>
+                    <p><strong>Dikkatli ol, herkes masum görünebilir...</strong></p>
+                </div>
+                
+                <button onclick="startGame()" class="btn-primary">🕵️ Oyuna Başla</button>
+                
+                <p style="margin-top: 30px; color: #a3a3a3; font-size: 0.9rem;">
+                    💝 Özge için özel olarak hazırlandı
+                </p>
+            </div>
+        </div>
+
+        <!-- Ana Oyun Ekranı -->
+        <div id="game-screen" class="screen">
+            <div class="header">
+                <h2>📁 Olay Dosyası #2847</h2>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Süre</span>
+                        <span class="stat-value" id="timer">00:00</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">İpuçları</span>
+                        <span class="stat-value" id="clue-count">0/50</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Zorluk</span>
+                        <span class="stat-value" style="color: #dc2626;">EXPERT</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-container">
+                <!-- Sol Panel - Menü -->
+                <div class="left-panel">
+                    <div class="menu">
+                        <button class="menu-btn active" onclick="showSection('case')">
+                            📁 Olay Özeti
+                        </button>
+                        <button class="menu-btn" onclick="showSection('suspects')">
+                            👥 Şüpheliler (8)
+                        </button>
+                        <button class="menu-btn" onclick="showSection('messages')">
+                            💬 Mesajlar
+                        </button>
+                        <button class="menu-btn" onclick="showSection('evidence')">
+                            🔍 Kanıtlar (25+)
+                        </button>
+                        <button class="menu-btn" onclick="showSection('timeline')">
+                            ⏰ Zaman Çizelgesi
+                        </button>
+                        <button class="menu-btn" onclick="showSection('notes')">
+                            📝 Notlarım
+                        </button>
+                    </div>
+                    <button class="solve-btn" onclick="showSolveModal()">
+                        🎯 Katili Açıkla
+                    </button>
+                </div>
+
+                <!-- Orta Panel - İçerik -->
+                <div class="content-panel">
+                    <div id="case-section" class="section active">
+                        <h3>Olay Özeti</h3>
+                        <div class="case-file">
+                            <img id="crime-scene-photo" src="" alt="Olay Yeri" style="background: #000;">
+                            <div class="case-details">
+                                <p><strong>Tarih:</strong> <span>14 Mayıs 2026, Cuma</span></p>
+                                <p><strong>Saat:</strong> <span>22:43 (Ölüm saati)</span></p>
+                                <p><strong>Yer:</strong> <span>Mavi Köşk Villası, Büyükada</span></p>
+                                <p><strong>Kurban:</strong> <span>Deniz Yılmaz (32, Girişimci)</span></p>
+                                <p><strong>Ölüm Nedeni:</strong> <span style="color: #dc2626;">Siyanür Zehirlenmesi</span></p>
+                            </div>
+                            <div class="case-story">
+                                <h4>📋 Olay:</h4>
+                                <p>Deniz Yılmaz, yakın çevresinden 8 kişiyi villasında düzenlediği özel bir akşam yemeğine davet etti. 
+                                Yemek sırasında herkes neşeli görünüyordu. Saat 22:25'te Deniz, şarap kadehinden bir yudum aldıktan 
+                                sonra aniden fenalaşmaya başladı. 22:43'te hayatını kaybetti.</p>
+                                
+                                <p>Adli tıp raporu, şarabında yüksek dozda siyanür tespit etti. Villa o gece kilitliydi ve 
+                                sadece davetliler içerideydi. Güvenlik kamerası 22:15-22:20 arası 5 dakika kapandı.</p>
+                                
+                                <p class="highlight">🔴 KRİTİK: Tüm davetliler olay gecesi villada kaldı. Kimse ayrılmadı. 
+                                Katil, 8 şüpheliden biri olmalı. Ama kim?</p>
+                                
+                                <p class="highlight">⚠️ Deniz'in son sözleri: "Sen... sen miydin?" - Katili tanıyordu!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="suspects-section" class="section">
+                        <h3>Şüpheliler</h3>
+                        <p style="margin-bottom: 30px; color: #a3a3a3;">
+                            8 şüpheli, 8 güçlü motif. Hepsinin sırları var. Alibiler ne kadar güvenilir?
+                        </p>
+                        <div class="suspects-grid" id="suspects-list"></div>
+                    </div>
+
+                    <div id="messages-section" class="section">
+                        <h3>WhatsApp Mesajları</h3>
+                        <p style="margin-bottom: 30px; color: #a3a3a3;">
+                            Olay öncesi ve sırasındaki mesajlar. Şüpheli ifadeler kırmızı çerçeveli. Şifreli mesajlara dikkat!
+                        </p>
+                        <div class="messages-container" id="messages-list"></div>
+                    </div>
+
+                    <div id="evidence-section" class="section">
+                        <h3>Kanıtlar ve İpuçları</h3>
+                        <p style="margin-bottom: 30px; color: #a3a3a3;">
+                            25+ kanıt toplandı. Önem derecelerine dikkat et. Hangi kanıtlar birbirine bağlanıyor?
+                        </p>
+                        <div class="evidence-grid" id="evidence-list"></div>
+                    </div>
+
+                    <div id="timeline-section" class="section">
+                        <h3>Zaman Çizelgesi</h3>
+                        <p style="margin-bottom: 30px; color: #a3a3a3;">
+                            Olay gecesinin dakika dakika kaydı. 22:15-22:30 arası kritik! Çelişkileri bul.
+                        </p>
+                        <div class="timeline" id="timeline-list"></div>
+                    </div>
+
+                    <div id="notes-section" class="section">
+                        <h3>Notlarım</h3>
+                        <p style="margin-bottom: 20px; color: #a3a3a3;">
+                            Şüphelerini, teorilerini ve ipuçlarını buraya yaz. (Ctrl+S ile kaydet)
+                        </p>
+                        <textarea id="notes-area" placeholder="Teorilerim:
+
+Selin çok şüpheli çünkü:
+- Doktor - zehir bilgisi var
+- Hastaneden siyanür çalmış
+- 22:20'de 'banyoda' dedi ama mutfaktaydı
+- Mutfakta DNA'sı bulundu
+- Alibi yok - tanık yok
+- Günlüğünde intikam planları
+- Bilinmeyen biriyle şifreli mesajlar
+
+Ama diğerleri de şüpheli..."></textarea>
+                        <button onclick="saveNotes()" class="btn-secondary">💾 Kaydet (Ctrl+S)</button>
+                    </div>
+                </div>
+
+                <!-- Sağ Panel - Detaylar -->
+                <div class="right-panel">
+                    <div class="info-box">
+                        <h4>💡 Dedektif İpucu</h4>
+                        <p id="hint-text">Her detay önemli. Mesajları dikkatlice oku, zaman çizelgesini incele ve çelişkileri bul.</p>
+                    </div>
+                    <div class="discovered-clues">
+                        <h4>Keşfedilen İpuçları</h4>
+                        <ul id="clues-list"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Çözüm Modal -->
+        <div id="solve-modal" class="modal">
+            <div class="modal-content">
+                <h3>Katili Kim Olduğunu Düşünüyorsun?</h3>
+                <p style="margin: 20px 0; color: #a3a3a3;">
+                    Emin misin? Yanlış seçim yaparsan gerçek katil kaçacak!
+                </p>
+                <div id="suspect-choices"></div>
+                <button onclick="closeSolveModal()" class="btn-secondary">❌ İptal</button>
+            </div>
+        </div>
+
+        <!-- Sonuç Ekranı -->
+        <div id="result-screen" class="screen">
+            <div class="container">
+                <div id="result-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game-data.js"></script>
+    <script src="images.js"></script>
+    <script src="script-advanced.js"></script>
+</body>
+</html>
